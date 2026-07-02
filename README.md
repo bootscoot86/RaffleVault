@@ -52,36 +52,39 @@ A self-hosted, containerized raffle management platform built for nonprofit orga
 ## Quick Start
 
 ### Requirements
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) — install and make sure it is running before proceeding
 
-### 1. Clone the repo
+### Windows
+1. Download or clone this repository
+2. Double-click **`install.bat`**
+3. Enter your email address when prompted
+4. Wait for Docker to finish (a few minutes the first time)
+5. Open **http://localhost:3000** in your browser
+
+### Linux / macOS
+1. Download or clone this repository
+2. Open a terminal in the project folder
+3. Run:
 ```bash
-git clone https://github.com/bootscoot86/rafflevault.git
-cd rafflevault
+chmod +x install.sh
+./install.sh
 ```
+4. Enter your email address when prompted
+5. Open **http://localhost:3000** in your browser
 
-### 2. Create your environment file
+The installer automatically generates secure passwords and starts everything for you. The setup wizard will walk you through the rest.
+
+> **Admin panel:** http://localhost:3000/admin — bookmark this.
+
+---
+
+### Manual Install (advanced)
+If you prefer to set things up yourself:
 ```bash
 cp .env.example .env
-```
-
-Edit `.env` and set your values:
-```
-POSTGRES_PASSWORD=choose_a_strong_password
-JWT_SECRET=choose_a_long_random_string
-RAFFLEVAULT_OWNER_EMAIL=your@email.com
-```
-
-### 3. Start the containers
-```bash
+# Edit .env and fill in your values
 docker compose up --build -d
 ```
-
-### 4. Open your browser
-- **Public site:** http://localhost:3000
-- **Admin panel:** http://localhost:3000/admin
-
-The setup wizard will walk you through everything on first launch.
 
 ---
 
