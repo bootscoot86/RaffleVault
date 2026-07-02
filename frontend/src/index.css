@@ -1,0 +1,85 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #1a237e;
+  --primary-light: #e8eaf6;
+  --gold: #ffd700;
+  --success: #2e7d32;
+  --danger: #c62828;
+  --text: #1a1a2e;
+  --muted: #666;
+  --border: #e0e0e0;
+  --bg: #f4f6f9;
+  --white: #ffffff;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  nav { padding: 0 1rem !important; height: auto !important; min-height: 56px; flex-wrap: wrap; }
+
+  /* Main content padding */
+  main { padding: 0 0.75rem !important; margin: 1rem auto !important; }
+
+  /* Raffle grid — single column on mobile */
+  .raffle-grid { grid-template-columns: 1fr !important; }
+
+  /* Raffle detail — stack columns */
+  .raffle-layout { flex-direction: column !important; }
+  .raffle-left, .raffle-right { flex: 1 1 100% !important; }
+  .raffle-main-img { height: 220px !important; }
+
+  /* Admin dashboard tabs — wrap into grid on mobile */
+  .admin-tabs { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6px !important; width: 100%; }
+  .admin-tabs button { width: 100%; text-align: center; font-size: 12px !important; padding: 10px 6px !important; }
+
+  /* Admin header — stack */
+  .admin-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+
+  /* Summary cards — 2 per row */
+  .summary-cards { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px !important; }
+
+  /* Raffle row — stack on mobile */
+  .raffle-row { flex-wrap: wrap !important; }
+  .raffle-actions { width: 100%; justify-content: flex-start !important; margin-top: 8px; }
+
+  /* Forms — full width inputs */
+  input, select, textarea { width: 100%; }
+
+  /* Setup wizard card */
+  .setup-card { padding: 24px 16px !important; }
+
+  /* Entry form quantity buttons */
+  .qty-wrap { gap: 8px !important; }
+
+  /* Reports filters — stack */
+  .report-filters { flex-direction: column !important; align-items: flex-start !important; }
+
+  /* Tables — horizontal scroll */
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Buttons in rows — smaller on mobile */
+  .btn-sm { padding: 5px 8px !important; font-size: 11px !important; }
+}
+
+/* ── Print styles — only show the account document ── */
+@media print {
+  body * { visibility: hidden; }
+  #print-doc, #print-doc * { visibility: visible; }
+  #print-doc { position: absolute; left: 0; top: 0; width: 100%; padding: 32px; font-size: 13px; }
+  .no-print { display: none !important; }
+}

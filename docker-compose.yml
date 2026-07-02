@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: rafflevault
+      POSTGRES_USER: rafflevault
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rafflevault -d rafflevault"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://rafflevault:${POSTGRES_PASSWORD}@db:5432/rafflevault
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: 4000
+      RAFFLEVAULT_OWNER_EMAIL: ${RAFFLEVAULT_OWNER_EMAIL}
+      SITE_ORIGIN: ${SITE_ORIGIN:-}
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:
+  uploads:
